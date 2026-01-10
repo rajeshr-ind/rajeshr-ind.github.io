@@ -1,0 +1,48 @@
+facebook:
+  label: Facebook
+  permalink: /facebook
+  description: Facebook tag description
+
+hello:
+  label: Hello
+  permalink: /hello
+  description: Hello tag description
+
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Docusaurus tag description
+
+hola:
+  label: Hola
+  permalink: /hola
+  description: Hola tag description
+
+domain:
+  label: Domain Knowledge
+  description: Domain Knowledge Post
+
+HelloWorld:
+  label: "Hello 👋🏼"
+  permalink: /hello-world
+  description: Introductory blog
+
+nlp:
+  label: "Natural Language Processing 📄"
+  permalink: /nlp
+  description: Topic about Understanding and generating content from the natural language text
+
+bert:
+  label: "BERT"
+  permalink: /bert
+  description: "BERT related topic"
+
+llm:
+  label: LLM
+  permalink: /llm
+  description: Large Language Models
+
+security:
+  label: Security
+  permalink: /security
+  description: Security related topics

@@ -1,0 +1,40 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #5b5900;
+  --ifm-color-primary-dark: #525000;
+  --ifm-color-primary-darker: #494700;
+  --ifm-color-primary-darkest: #403e00;
+  --ifm-color-primary-light: #646200;
+  --ifm-color-primary-lighter: #6d6b00;
+  --ifm-color-primary-lightest: #767400;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #f7f9a4;
+  --ifm-color-primary-dark: #f4f67d;
+  --ifm-color-primary-darker: #f2f56a;
+  --ifm-color-primary-darkest: #edf130;
+  --ifm-color-primary-light: #fafccb;
+  --ifm-color-primary-lighter: #fcfdde;
+  --ifm-color-primary-lightest: #ffffff;
+  --ifm-background-color: #141301;
+}
+
+/* Custom Mermaid Styling for Horizontal Scrolling */
+.docusaurus-mermaid-container {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.docusaurus-mermaid-container svg {
+  max-width: none !important; /* Allow the SVG to be wider than the container */
+  min-width: 100%; /* Ensure it fills the container if smaller */
+}
