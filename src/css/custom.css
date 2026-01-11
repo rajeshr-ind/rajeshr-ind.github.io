@@ -6,25 +6,49 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #5b5900;
-  --ifm-color-primary-dark: #525000;
-  --ifm-color-primary-darker: #494700;
-  --ifm-color-primary-darkest: #403e00;
-  --ifm-color-primary-light: #646200;
-  --ifm-color-primary-lighter: #6d6b00;
-  --ifm-color-primary-lightest: #767400;
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ifm-color-primary: #6f42c1;
+  --ifm-color-primary-dark: #643bb1;
+  --ifm-color-primary-darker: #5e37a6;
+  --ifm-color-primary-darkest: #4e2e89;
+  --ifm-color-primary-light: #7a49d1;
+  --ifm-color-primary-lighter: #804cdb;
+  --ifm-color-primary-lightest: #9360ea;
+  --ifm-font-family-base: 'Google Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Wide mode configuration for larger screens only */
+@media (min-width: 997px) {
+  :root {
+    --ifm-container-width: 1400px;
+    --ifm-container-width-xl: 1536px;
+  }
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #f7f9a4;
-  --ifm-color-primary-dark: #f4f67d;
-  --ifm-color-primary-darker: #f2f56a;
-  --ifm-color-primary-darkest: #edf130;
-  --ifm-color-primary-light: #fafccb;
-  --ifm-color-primary-lighter: #fcfdde;
-  --ifm-color-primary-lightest: #ffffff;
-  --ifm-background-color: #141301;
+  --ifm-color-primary: #a78bfa;
+  --ifm-color-primary-dark: #9675f9;
+  --ifm-color-primary-darker: #8d6bf9;
+  --ifm-color-primary-darkest: #734af7;
+  --ifm-color-primary-light: #b8a1fb;
+  --ifm-color-primary-lighter: #c0adfb;
+  --ifm-color-primary-lightest: #d7cdfc;
+  --ifm-background-color: #121212;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply animations */
+main {
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 /* Enhanced Hero Styling */
@@ -45,12 +69,35 @@
   font-weight: 800;
   font-size: 3.5rem;
   letter-spacing: -0.02em;
+  animation: slideUp 0.8s ease-out forwards;
 }
 
 .hero__subtitle {
   font-size: 1.5rem;
   margin-bottom: 2rem;
   opacity: 0.8;
+  animation: slideUp 0.8s ease-out 0.2s forwards; /* Delay for subtitle */
+  opacity: 0; /* Start invisible for animation */
+  animation-fill-mode: forwards;
+}
+
+/* Button & Card Hover Effects */
+.button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Custom Mermaid Styling for Horizontal Scrolling */
