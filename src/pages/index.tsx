@@ -20,7 +20,13 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/blog">
-            Check out my Blog 📝
+            Read My Blog 📝
+          </Link>
+          <Link
+            className="button button--secondary button--lg"
+            style={{ marginLeft: '1rem', backgroundColor: 'transparent', border: '2px solid white', color: 'white' }}
+            to="https://github.com/rajeshr-ind">
+            GitHub 🐙
           </Link>
         </div>
       </div>
@@ -32,8 +38,8 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={``}
+      description="Personal site and documentation of Rajesh Ramesh">
       <HomepageHeader />
       <main>
       </main>

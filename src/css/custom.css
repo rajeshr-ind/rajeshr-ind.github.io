@@ -13,6 +13,7 @@
   --ifm-color-primary-light: #646200;
   --ifm-color-primary-lighter: #6d6b00;
   --ifm-color-primary-lightest: #767400;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 [data-theme='dark'] {
@@ -24,6 +25,32 @@
   --ifm-color-primary-lighter: #fcfdde;
   --ifm-color-primary-lightest: #ffffff;
   --ifm-background-color: #141301;
+}
+
+/* Enhanced Hero Styling */
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+}
+
+.hero__title {
+  font-weight: 800;
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
 }
 
 /* Custom Mermaid Styling for Horizontal Scrolling */
