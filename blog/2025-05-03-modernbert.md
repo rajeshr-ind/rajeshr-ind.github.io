@@ -1,9 +1,10 @@
 ---
 title: ModernBERT
-description: An overview about ModernBERT
+description: A comprehensive analysis of ModernBERT, exploring its architectural improvements over the original BERT model.
 slug: modernbert
 authors: [rajesh]
-tags: [nlp, bert]
+tags: [nlp, bert, modernbert, transformers, encoder-models]
+keywords: [modernbert, bert, nlp, natural language processing, transformer architecture, rope, flash attention]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: true
 ---

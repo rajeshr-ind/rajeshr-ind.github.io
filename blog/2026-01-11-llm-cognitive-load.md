@@ -1,9 +1,10 @@
 ---
 title: Cognitive Load in Large Language Models - A Useful Metaphor
-description: This is my first post with Docusaurus.
+description: Explore the concept of cognitive load in LLMs—a metaphor for how information complexity affects model performance and reliability.
 slug: llm-cognitive-load
 authors: [rajesh]
-tags: []
+tags: [llm, ai, prompt-engineering, cognitive-load]
+keywords: [large language models, llm, cognitive load, prompt engineering, ai reliability, attention mechanism]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
 ---
