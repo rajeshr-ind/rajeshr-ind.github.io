@@ -70,6 +70,11 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {name: 'description', content: 'Personal site and documentation of Rajesh Ramesh, an AI Engineer.'},
+      {name: 'keywords', content: 'Rajesh Ramesh, AI Engineer, Software Engineer, Blog, Documentation, Portfolio'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+    ],
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -77,7 +82,7 @@ const config: Config = {
       title: 'Rajesh Ramesh',
       logo: {
         alt: 'Rajesh Ramesh Logo',
-        src: 'img/logo-rr.svg',
+        src: 'img/favicon.png',
       },
       items: [
         {to: '/blog', label: 'Blog', position: 'left'},

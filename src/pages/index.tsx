@@ -38,7 +38,7 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={``}
+      title="Home"
       description="Personal site and documentation of Rajesh Ramesh">
       <HomepageHeader />
       <main>
