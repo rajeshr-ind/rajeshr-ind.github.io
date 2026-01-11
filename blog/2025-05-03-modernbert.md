@@ -6,9 +6,9 @@ authors: [rajesh]
 tags: [nlp, bert, modernbert, transformers, encoder-models]
 keywords: [modernbert, bert, nlp, natural language processing, transformer architecture, rope, flash attention]
 image: https://i.imgur.com/mErPwqL.png
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
-# ModernBERT
+<!-- # ModernBERT -->
 
 This blog presents a comparative analysis of the foundational BERT model and the recent ModernBERT approach.
 We first establish the context by reviewing BERT's architecture and limitations.
@@ -18,7 +18,7 @@ limitations of ModernBERT and proposing viable solutions to overcome these chall
 
 <!-- truncate -->
 
-### Introduction
+# Introduction
 
 The paper [Smarter, Better, Faster, Longer: A Modern Bidirectional Encoder for Fast, Memory Efficient, and Long
 Context Finetuning and Inference](https://arxiv.org/abs/2412.13663), introduces ModernBERT, a new family of encoder-only transformer models
@@ -32,7 +32,7 @@ ModernBERT aims to bridge this gap by integrating contemporary optimizations int
 resulting in models that are not only more performant across diverse tasks but also faster, more memory-efficient,
 and capable of handling much longer sequences.
 
-### BERT background
+## BERT background
 Google introduced BERT in 2018, which is significantly advanced NLP. Unlike earlier models that processed text
 unidirectionally and sequentially (left-to-right or right-to-left or both), BERT leverages the Transformer architecture
 to process the entire sequence of words at once, considering both left and right context simultaneously. This
@@ -41,33 +41,39 @@ Pre-trained on massive text corpora using tasks like Masked Language Modeling, B
 language representations. These pre-trained models can then be quickly fine-tuned with smaller datasets to achieve
 SOTA performance on various downstream NLP tasks.
 
-### Problem Statement: Limitations of BERT
+## Problem Statement: Limitations of BERT
 Despite their relevance, encoder-only models like BERT face several limitations that hinder their performance
 compared to modern advancements. Below are the key issues:
-#### Short Sequence Length
+
+### Short Sequence Length
 BERT is limited to 512 tokens, making it unsuitable for processing long documents, dialogues, or complex contexts
 in tasks like long-document retrieval or detailed report analysis. Techniques like pooling can help, but they often
 reduce the model's understanding of larger documents.
-#### Outdated Architecture
+
+### Outdated Architecture
 BERT's design, including absolute positional embeddings, post-layer normalization, and GeLU activation, is less
 effective than modern alternatives. Its vocabulary size is also not optimized for current hardware, reducing efficiency.
-#### Computational Inefficiency
+
+### Computational Inefficiency
 BERT was not designed for modern GPUs or optimized attention mechanisms, leading to slow training and inference.
 Padding further wastes computational resources on non-semantic tokens.
-#### Limited and Outdated Training Data
+
+### Limited and Outdated Training Data
 BERT's pre-training datasets are smaller and less diverse than modern standards, often lacking code-related data.
 This limits its performance on programming tasks and makes its knowledge outdated.
-#### Incomplete Modernization Efforts
+
+### Incomplete Modernization Efforts
 Recent models like MosaicBERT and CrammingBERT improve training efficiency but don't fully address other
 limitations. NomicBERT and GTE-en-MLM support longer contexts (2048 and 8192 tokens respectively), but they
 focus on retrieval, reuse older datasets, and lack optimization for inference or classification, especially for code-
 related tasks.
 
-### Solution Approach
+## Solution Approach
 ModernBERT tackles the limitations of earlier encoders through a multi-pronged approach encompassing
 architectural improvements, efficiency optimizations, large-scale training with modern data, and careful model
 design:
-#### Architectural Improvements:
+
+### Architectural Improvements:
 The core transformer architecture was updated based on inspiration from LLMs. Key changes included:
 Rotary Positional Embeddings: ModernBERT replaces absolute positional embeddings with RoPE, providing better
 performance in long-context scenarios and easier context extension.
@@ -77,14 +83,16 @@ Activation Function: Using GeGLU, a GLU variant that provides empirical improvem
 Bias Removal: Disabling bias terms in most linear layers (except the final MLM prediction head) and all LayerNorm
 layers to allocate parameter budget more effectively to weight matrices. The final decoder bias was retained,
 hypothesizing it might help alleviate negative effects of weight tying.
-#### Efficiency Enhancements:
+
+### Efficiency Enhancements:
 Several techniques were incorporated specifically to boost training and inference speed and reduce memory usage:
 Alternating Attention: Based on models like Google’s Gemma 2, ModernBERT alternates between global attention
 (every token attends to all others) and local sliding window attention (tokens attend only within a 128-token window).
 This significantly reduces the quadratic complexity of attention in most layers while retaining global context
 processing capability periodically. Different RoPE theta values were used for global (160,000) and local (10,000)
 attention layers.
-#### Optimized Unpadding:
+
+### Optimized Unpadding:
 While unpadding (removing padding tokens and processing concatenated sequences) was
 used by MosaicBERT and GTE, ModernBERT employs an improved version. It leverages Flash Attention's variable-
 length sequence support to perform unpadding once before the embedding layer and optionally repad only at the
@@ -94,7 +102,8 @@ Flash Attention: Uses Flash Attention 2 for local attention and Flash Attention 
 leverage memory and compute-efficient attention kernels available on modern GPUs.
 torch.compile: Leverages PyTorch's built-in compiler to optimize compatible model modules, yielding around a 10%
 throughput improvement during training.
-#### Training and Data:
+
+### Training and Data:
 Data Scale and Mixture: Trained on a massive 2 trillion tokens, significantly larger than most previous encoders. The
 data mixture included diverse sources like web documents, scientific literature, and crucially, code data, reflecting
 modern LLM training practices. The final mixture was chosen based on ablation studies.
@@ -102,15 +111,16 @@ Modern Tokenizer: A modern BPE tokenizer, adapted from the OLMo project, was use
 BERT/RoBERTa tokenizers. This offers better token efficiency and performance on code. It maintains compatibility
 with BERT's special tokens ([CLS], [SEP]) and has a vocabulary size of 50,368 (a multiple of 64 for GPU efficiency),
 including unused tokens for downstream flexibility.
-#### Sequence Packing:
+
+### Sequence Packing:
 Used alongside unpadding to pack multiple short sequences into a single longer sequence up
 to the maximum length, ensuring batch size uniformity and high packing efficiency (>99%).
 
-#### Training Objective:
+### Training Objective:
 Employed the MLM objective with an increased masking rate of 30% (up from BERT's 15%),
 found to be more optimal. The NSP objective was removed as it offers no benefit but adds overhead.
 
-#### Optimization:
+### Optimization:
 Used the Stable AdamW optimizer with Adafactor-style update clipping, which provided more stable
 training and better downstream results than standard AdamW with gradient clipping. Applied fully decoupled weight
 decay, excluding bias and normalization layers.
