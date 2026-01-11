@@ -7,6 +7,7 @@ tags: [llm, ai, prompt-engineering, cognitive-load]
 keywords: [large language models, llm, cognitive load, prompt engineering, ai reliability, attention mechanism]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false
+sidebar_label: LLM Cognitive Load
 ---
 
 When people talk about **“cognitive load”** in Large Language Models (LLMs), they’re borrowing a term from human psychology—but applying it metaphorically.
