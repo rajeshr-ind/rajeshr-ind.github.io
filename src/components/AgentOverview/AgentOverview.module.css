@@ -1,0 +1,189 @@
+.bentoContainer {
+  --bento-bg: linear-gradient(160deg, #0d0920 0%, #080f1f 100%);
+  --bento-cell-bg: rgba(255, 255, 255, 0.05);
+  --bento-cell-border: rgba(255, 255, 255, 0.1);
+  --bento-text: #ffffff;
+  --bento-text-muted: rgba(255, 255, 255, 0.6);
+  --bento-hero-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.45) 0%, rgba(6, 182, 212, 0.3) 100%);
+  
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: repeat(5, 1fr) !important;
+  gap: 12px !important;
+  min-height: 800px;
+  width: 100%;
+  padding: 32px !important;
+  position: relative;
+  overflow: hidden;
+  background: var(--bento-bg) !important;
+  border-radius: 24px;
+  margin: 2rem 0;
+  box-sizing: border-box;
+}
+
+:global([data-theme='light']) .bentoContainer {
+  --bento-bg: linear-gradient(160deg, #f8faff 0%, #eef2ff 100%);
+  --bento-cell-bg: rgba(255, 255, 255, 0.7);
+  --bento-cell-border: rgba(124, 58, 237, 0.15);
+  --bento-text: #1a1a1b;
+  --bento-text-muted: #4a5568;
+  --bento-hero-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%);
+}
+
+.gradientMesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  animation: floatSlow 16s ease-in-out infinite;
+  opacity: 0.15;
+}
+
+:global([data-theme='light']) .blob {
+  opacity: 0.1;
+  filter: blur(80px);
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(30px,-25px) scale(1.06); }
+  66% { transform: translate(-20px,20px) scale(0.96); }
+}
+
+.bentoCell {
+  z-index: 1;
+  border-radius: 20px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background: var(--bento-cell-bg);
+  border: 1px solid var(--bento-cell-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.bentoCell:hover {
+  background: var(--bento-cell-bg);
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.bentoCell h4 {
+  margin: 0 !important;
+  color: var(--bento-text) !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.bentoCell p {
+  margin: 6px 0 0 !important;
+  font-size: 0.72rem !important;
+  color: var(--bento-text-muted) !important;
+  line-height: 1.4 !important;
+}
+
+.emoji {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  background: var(--bento-hero-bg) !important;
+  border: 1px solid var(--bento-cell-border) !important;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.hero h3 {
+  font-size: 2.4rem !important;
+  font-weight: 900 !important;
+  color: var(--bento-text) !important;
+  background: linear-gradient(135deg, var(--bento-text) 40%, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.05;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.hero p {
+  font-size: 0.85rem !important;
+  color: var(--bento-text-muted) !important;
+  max-width: 280px;
+  line-height: 1.5 !important;
+}
+
+.heroEmoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.tall {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  padding: 24px 20px;
+  justify-content: flex-end;
+}
+
+.tall .emoji {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2.4rem;
+}
+
+.tall h4 {
+  font-size: 1rem !important;
+}
+
+/* Entrance Animations - simplified to just handle opacity/transform */
+@keyframes bentoIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animateCell {
+  animation: bentoIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 996px) {
+  .bentoContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+  .bentoCell {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hero {
+    order: -1;
+  }
+}
